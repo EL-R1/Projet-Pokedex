@@ -112,3 +112,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#ignore virtual environment
+Pokedex/
+
+#ignore .idea from jetbrains
+.idea/
