@@ -65,6 +65,23 @@
     </tbody>
 </table>
 
+<div class="container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col">
+            <label for="exampleDataList" class="form-label">Recherchez un pokémon</label>
+            <input class="form-control" list="datalistOptions" placeholder="Tapez pour rechercher">
+            <datalist id="datalistOptions">
+                {% for pokemon in all_pokemon %}
+                    <option value="{{ pokemon }}">
+                {% endfor %}
+            </datalist>
+        </div>
+    </div>
+
+</div>
+
 
 <div class="container">
     <div class="row">
@@ -81,17 +98,23 @@
         <tr>
             <th> Type(s) :</th>
             <th> Poids :</th>
+            <th> Taille :</th>
 
         </tr>
 
         <tr>
             <td>
                 {% for test  in type %}
-                    {{ test }}
+                    <p>
+                        {{ test }}
+                    </p>
                 {% endfor %}
             </td>
             <td>
                 {{ poids }} kg
+            </td>
+            <td>
+                {{ taille }} m
             </td>
         </tr>
     </table>

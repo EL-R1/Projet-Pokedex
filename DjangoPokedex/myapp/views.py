@@ -19,7 +19,6 @@ def translate(num_pok, content, nameEn):
     if nameFr == '':
         nameFr = nameEn
 
-    print(nameFr)
     return nameFr
 
 
@@ -32,6 +31,7 @@ def init_pokemon(url, num_pok):
         poids = int(response['weight']) / 10
         image = response['sprites']['other']['official-artwork']['front_default']
         type = response['types']
+        taille = int(response['height']) / 10
 
     else:
         nameEn = ''
@@ -39,8 +39,9 @@ def init_pokemon(url, num_pok):
         poids = ''
         image = ''
         type = ''
+        taille = ''
 
-    tab_num_pok = {'nameEn': nameEn, 'img': img, 'poids': poids, 'image': image, 'type': type}
+    tab_num_pok = {'nameEn': nameEn, 'img': img, 'poids': poids, 'image': image, 'type': type, 'taille': taille}
     return tab_num_pok
 
 
@@ -76,9 +77,23 @@ def index(request):
     for types in tab_pok['type']:
         typeFr.append(translate(num_pok, type, types['type']['name']))
 
+    all_pok_url = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1500"
+    all_pokemon = []
+    r = re.get(all_pok_url)
+    response = r.json()
+    for pokemon in response["results"]:
+        all_pokemon.append(pokemon['name'])
+
+    # all_pokemonFr = []
+    # for pokemon in all_pokemon:
+    #     all_pokemon.append(translate(1, name, pokemon))
+
+
+
+
     context = {'name': nameFr, 'name0': nameFr0, 'name1': nameFr1, 'img0': tab_pok0['img'], 'img': tab_pok['img'],
                'img1': tab_pok1['img'],
-               'image': tab_pok['image'], 'poids': tab_pok['poids'], 'pok0': num_pok0, 'pok1': num_pok1, 'type': typeFr}
+               'image': tab_pok['image'], 'poids': tab_pok['poids'], 'pok0': num_pok0, 'pok1': num_pok1, 'type': typeFr, 'taille': tab_pok['taille'], 'all_pokemon': all_pokemon}
 
     return render(request, 'myapp/index.html', context)
 
