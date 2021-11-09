@@ -20,5 +20,4 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('accueil/', views.accueil, name="accueil"),
     path('result/<int:number>/', views.result, name="result"),
-    path('pokemon/', views.pokemon, name = "pokemon")
 ]
