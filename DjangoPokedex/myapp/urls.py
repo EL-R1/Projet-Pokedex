@@ -18,6 +18,5 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name="index"),
-    path('accueil/', views.accueil, name="accueil"),
-    path('result/<int:number>/', views.result, name="result"),
+    path('team/', views.team, name="accueil"),
 ]

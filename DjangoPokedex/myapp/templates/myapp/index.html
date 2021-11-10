@@ -40,26 +40,34 @@
         <td></td>
 
         <td>
-            <form action="" method="post">
-                {% csrf_token %}
-                <input type="hidden" value="{{ pok0 }}" name="Pokemon">
-                <button type="submit" class="btn btn-link">{{ name0 }}</button>
-            </form>
+
             {% if name0 != '' %}
+                <form action="" method="post">
+                    {% csrf_token %}
+
+                    <input type="hidden" value="{{ num_pok0 }}" name="Pokemon">
+                    <button type="submit" class="btn btn-link">n°{{ num_pok0 }} {{ name0 }}</button>
+                </form>
+
                 <img src="{{ img0 }}" alt="Image de {{ name0 }}">
+
             {% endif %}
         </td>
         <td>
-            <p>{{ name }}  </p>
+            <p>{{ name }} n°{{ num_pok }}  </p>
             <img src="{{ img }}" alt="Image de {{ name }}">
         </td>
         <td>
-            <form action="" method="post">
-                {% csrf_token %}
-                <input type="hidden" value="{{ pok1 }}" name="Pokemon">
-                <button type="submit" class="btn btn-link">{{ name1 }}</button>
-            </form>
-            <img src="{{ img1 }}" alt="Image de {{ name1 }}">
+
+            {% if name1 != '' %}
+                <form action="" method="post">
+                    {% csrf_token %}
+
+                    <input type="hidden" value="{{ num_pok1 }}" name="Pokemon">
+                    <button type="submit" class="btn btn-link">n°{{ num_pok1 }} {{ name1 }}</button>
+                </form>
+                <img src="{{ img1 }}" alt="Image de {{ name1 }}">
+            {% endif %}
         </td>
     </tr>
     </tbody>
@@ -70,13 +78,23 @@
         <div class="col"></div>
         <div class="col"></div>
         <div class="col">
-            <label for="exampleDataList" class="form-label">Recherchez un pokémon</label>
-            <input class="form-control" list="datalistOptions" placeholder="Tapez pour rechercher">
-            <datalist id="datalistOptions">
-                {% for pokemon in all_pokemon %}
-                    <option value="{{ pokemon }}">
-                {% endfor %}
-            </datalist>
+            <form action="" method="post">
+                {% csrf_token %}
+                <label for="exampleDataList" class="form-label">Recherchez un pokémon</label>
+                <div class="input-group mb-3">
+                    <input class="form-control" name="Pokemon_Name" list="datalistOptions"
+                           placeholder="Tapez pour rechercher">
+                    <datalist id="datalistOptions">
+                        {% for pokemon in all_pokemon %}
+                            <option value="{{ pokemon }}">
+                        {% endfor %}
+                    </datalist>
+
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Recherchez</button>
+                </div>
+
+
+            </form>
         </div>
     </div>
 
@@ -91,7 +109,14 @@
             <img src="{{ image }}" class="img-fluid" alt="Responsive image">
 
         </div>
-        <div class="col"></div>
+        <div class="col">
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="hidden" value="{{ num_pok }}" name="Pokemon">
+                <input type="hidden" name="Pokemon_Team" value="{{ num_pok }}">
+                <button class="btn btn-outline-primary" type="submit"> + Ajouter ce pokémon à votre équipe</button>
+            </form>
+        </div>
     </div>
 
     <table class="table table-striped">
