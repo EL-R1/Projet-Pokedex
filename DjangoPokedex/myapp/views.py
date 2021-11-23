@@ -1,6 +1,5 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.contrib.sessions.backends.db import SessionStore
 import random
 import requests as re
 
@@ -137,7 +136,6 @@ def init_pokemon(num_pok):
 def index(request):
     if request.method == 'POST':
         if request.POST.get("Pokemon") is not None and request.POST.get("Pokemon_Team") is None:
-            request.session[0] = ''
             num_pok = int(request.POST.get("Pokemon"))
         elif request.POST.get("Random") is not None:
             num_pok = random.randint(1, 800)
@@ -227,5 +225,4 @@ def index(request):
 
 
 def team(request):
-    text = "<h1>Pokemon : none </p>"
     return render(request, 'myapp/temp.html')
