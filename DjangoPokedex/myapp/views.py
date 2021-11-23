@@ -214,7 +214,7 @@ def index(request):
     # for pokemons in all_pokemon:
     #     all_pokemon.append(translate(0, name, pokemons))
 
-    context = {'name': tab_pok['nameEn'], 'name0': tab_pok0['nameFr'], 'name1': tab_pok1['nameFr'],
+    context = {'name': tab_pok['nameFr'], 'name0': tab_pok0['nameFr'], 'name1': tab_pok1['nameFr'],
                'img0': tab_pok0['img'], 'img': tab_pok['img'],
                'img1': tab_pok1['img'],
                'image': tab_pok['image'], 'poids': tab_pok['poids'], 'num_pok': num_pok, 'num_pok0': num_pok0,
