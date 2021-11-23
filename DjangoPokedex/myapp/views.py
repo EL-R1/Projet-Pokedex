@@ -136,7 +136,7 @@ def init_pokemon(num_pok):
 # Create your views here.
 def index(request):
     if request.method == 'POST':
-        if request.POST.get("Pokemon") is not None:
+        if request.POST.get("Pokemon") is not None and request.POST.get("Pokemon_Team") is None:
             request.session[0] = ''
             num_pok = int(request.POST.get("Pokemon"))
         elif request.POST.get("Random") is not None:
@@ -146,7 +146,8 @@ def index(request):
             pokemon_name = str(num_pok)
             num_pok = find_num_pok(pokemon_name)
         elif request.POST.get("Pokemon_Team") is not None:
-
+            text = "<h1>Pokemon : none </p>"
+            return render(request, 'myapp/temp.html')
             # test de session de merde
 
             # x =-1
@@ -227,4 +228,4 @@ def index(request):
 
 def team(request):
     text = "<h1>Pokemon : none </p>"
-    return HttpResponse(text)
+    return render(request, 'myapp/temp.html')
