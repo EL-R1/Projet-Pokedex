@@ -1,13 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.contrib.sessions.backends.db import SessionStore
 import random
 import requests as re
+from .models import TeamPokemon
 
-
+TeamPokemon = TeamPokemon()
 def translate(num_pok, content, nameEn):
     # Traduction dynamique avec les csv data sur github
-
     nameFr = ''
     nameEn = str(nameEn).capitalize()
     x = 0
@@ -137,7 +136,6 @@ def init_pokemon(num_pok):
 def index(request):
     if request.method == 'POST':
         if request.POST.get("Pokemon") is not None and request.POST.get("Pokemon_Team") is None:
-            request.session[0] = ''
             num_pok = int(request.POST.get("Pokemon"))
         elif request.POST.get("Random") is not None:
             num_pok = random.randint(1, 800)
@@ -146,8 +144,13 @@ def index(request):
             pokemon_name = str(num_pok)
             num_pok = find_num_pok(pokemon_name)
         elif request.POST.get("Pokemon_Team") is not None:
-            text = "<h1>Pokemon : none </p>"
-            return render(request, 'myapp/temp.html')
+            pok_id = str(request.POST.get("Pokemon"))
+            if TeamPokemon.Pokid1 is None:
+                TeamPokemon.Pokid1 = pok_id
+            else:
+                TeamPokemon.Pokid2 = pok_id
+            context = {'list':TeamPokemon}
+            return render(request, 'myapp/temp.html',context)
             # test de session de merde
 
             # x =-1
@@ -227,5 +230,5 @@ def index(request):
 
 
 def team(request):
-    text = "<h1>Pokemon : none </p>"
+
     return render(request, 'myapp/temp.html')
