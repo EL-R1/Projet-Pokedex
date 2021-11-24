@@ -39,6 +39,8 @@ def translate_name():
     return nameFr
 
 
+
+
 def find_num_pok(nameEn):
     # Trouver l'id du pokemon lors de la recherche
     try:
@@ -72,6 +74,11 @@ def find_num_pok(nameEn):
 
 
 def init_pokemon(num_pok):
+    if isinstance(num_pok, str):
+        if num_pok.isdigit():
+            num_pok = int(num_pok)
+    if num_pok is None:
+        return
     url = "https://pokeapi.co/api/v2/pokemon/"
     name_url = "https://pokeapi.co/api/v2/pokemon-species/"
     type_url = "https://pokeapi.co/api/v2/type/"
@@ -135,21 +142,25 @@ def init_pokemon(num_pok):
 # Create your views here.
 def index(request):
     if request.method == 'POST':
-        if request.POST.get("Pokemon") is not None and request.POST.get("Pokemon_Team") is None:
+        if request.POST.get("Pokemon") and request.POST.get("Pokemon_Team") is None:
             num_pok = int(request.POST.get("Pokemon"))
-        elif request.POST.get("Random") is not None:
+        elif request.POST.get("Random"):
             num_pok = random.randint(1, 800)
-        elif request.POST.get("Pokemon_Name") is not None:
+        elif request.POST.get("Pokemon_Name"):
             num_pok = str(request.POST.get("Pokemon_Name"))
             pokemon_name = str(num_pok)
             num_pok = find_num_pok(pokemon_name)
-        elif request.POST.get("Pokemon_Team") is not None:
-            pok_id = str(request.POST.get("Pokemon"))
-            if TeamPokemon.Pokid1 is None:
-                TeamPokemon.Pokid1 = pok_id
-            else:
-                TeamPokemon.Pokid2 = pok_id
-            context = {'list':TeamPokemon}
+        elif request.POST.get("Pokemon_Team"):
+            if request.POST.get("Pokemon") != "-1":
+                pok_id = str(request.POST.get("Pokemon"))
+                addToTeam(pok_id)
+            tab1 = init_pokemon(TeamPokemon.Pokid1)
+            tab2 = init_pokemon(TeamPokemon.Pokid2)
+            tab3 = init_pokemon(TeamPokemon.Pokid3)
+            tab4 = init_pokemon(TeamPokemon.Pokid4)
+            tab5 = init_pokemon(TeamPokemon.Pokid5)
+            ArrayTeam = [tab1, tab2, tab3, tab4, tab5]
+            context = {'list':TeamPokemon, 'ArrayTeam':ArrayTeam}
             return render(request, 'myapp/temp.html',context)
             # test de session de merde
 
@@ -228,6 +239,19 @@ def index(request):
 
     return render(request, 'myapp/index.html', context)
 
+def addToTeam(pok_id):
+    if TeamPokemon.Pokid1 is None:
+        TeamPokemon.Pokid1 = pok_id
+    elif TeamPokemon.Pokid2 is None:
+        TeamPokemon.Pokid2 = pok_id
+    elif TeamPokemon.Pokid3 is None:
+        TeamPokemon.Pokid3 = pok_id
+    elif TeamPokemon.Pokid4 is None:
+        TeamPokemon.Pokid4 = pok_id
+    elif TeamPokemon.Pokid5 is None:
+        TeamPokemon.Pokid5 = pok_id
+    else:
+       return False
 
 def team(request):
 

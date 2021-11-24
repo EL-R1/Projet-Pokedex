@@ -75,7 +75,14 @@
 
 <div class="container">
     <div class="row">
-        <div class="col"></div>
+        <div class="col">
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="hidden" value="-1" name="Pokemon">
+                <input type="hidden" name="Pokemon_Team" value="-1">
+                <button class="btn btn-outline-primary" type="submit"> Voir votre équipe</button>
+            </form>
+        </div>
         <div class="col"></div>
         <div class="col">
             <form action="" method="post">
