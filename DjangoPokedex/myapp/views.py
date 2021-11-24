@@ -82,6 +82,7 @@ def init_pokemon(num_pok):
     typeFr = ''
     taille = ''
     nameFr = ''
+    shiny = ''
     if isinstance(num_pok, int):
         if 1 <= num_pok <= 898 or 10001 <= num_pok <= 10220:
             r = re.get(url + str(num_pok))
@@ -92,6 +93,7 @@ def init_pokemon(num_pok):
             image = response['sprites']['other']['official-artwork']['front_default']
             type = response['types']
             taille = int(response['height']) / 10
+            shiny = response['sprites']['front_shiny']
 
             # Traduction avec l'api des types
             typeFr = []
@@ -128,7 +130,7 @@ def init_pokemon(num_pok):
         nameFr = 'ඞ'
 
     tab_num_pok = {'nameEn': nameEn, 'img': img, 'poids': poids, 'image': image, 'type': typeFr, 'taille': taille,
-                   'nameFr': nameFr}
+                   'nameFr': nameFr, 'shiny': shiny}
     return tab_num_pok
 
 
