@@ -221,7 +221,8 @@ def index(request):
                'image': tab_pok['image'], 'poids': tab_pok['poids'], 'num_pok': num_pok, 'num_pok0': num_pok0,
                'num_pok1': num_pok1,
                'type': tab_pok["type"],
-               'taille': tab_pok['taille'], 'all_pokemon': all_pokemon}
+               'taille': tab_pok['taille'], 'all_pokemon': all_pokemon,
+               'shiny': tab_pok['shiny']}
 
     return render(request, 'myapp/index.html', context)
 

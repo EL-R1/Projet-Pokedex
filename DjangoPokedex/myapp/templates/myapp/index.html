@@ -107,9 +107,6 @@
         <div class="col">
             <h1>{{ name }}</h1>
             <img src="{{ image }}" class="img-fluid" alt="Responsive image">
-            <a href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/5.png" class="btn btn-outline-primary">Forme Shiny</a>
-            <img src="{{ shiny }}" class="img-fluid" alt="Responsive image">
-
 
         </div>
         <div class="col">
@@ -127,6 +124,7 @@
             <th> Type(s) :</th>
             <th> Poids :</th>
             <th> Taille :</th>
+            <th> Shiny :</th>
 
         </tr>
 
@@ -143,6 +141,9 @@
             </td>
             <td>
                 {{ taille }} m
+            </td>
+            <td>
+                <img src="{{ shiny }}" class="img-fluid" alt="Responsive image">
             </td>
         </tr>
     </table>
