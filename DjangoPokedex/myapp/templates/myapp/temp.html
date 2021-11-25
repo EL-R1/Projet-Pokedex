@@ -21,14 +21,25 @@
         {% csrf_token %}
         <button class="btn btn-outline-primary" type="submit">retour à la liste</button>
     </form>
+    <h1 class="text-center mx-auto">Mon équipe</h1>
 <div class="card-group">
     {% for pokemon in ArrayTeam %}
-        <div class="card">
+        <div class="card text-dark bg-light mb-3 border-success mb-3" >
         {% if pokemon.image %}
             <img class="card-img-top" src="{{pokemon.image}}" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">{{pokemon.nameFr}}</h5>
+                <p class="card-text">Poids : {{ pokemon.poids }} kg</p>
+                <p class="card-text">Types : </p>
+                {% for test  in pokemon.type %}
+                        <p class="card-text">
+                            {{ test }}
+                        </p>
+                    {% endfor %}
+
             </div>
+
+
         {% else %}
         <img class="card-img-top" src="https://studio.cults3d.com/cpVLSLBgXftw_KujSHqr_VFILaI=/516x516/https://files.cults3d.com/uploaders/13859964/illustration-file/9d9c1945-5499-463e-92ca-5b5954e03b41/No%20Pokemon%20hunting.png" alt="Card image cap">
             <div class="card-body">
