@@ -17,6 +17,7 @@
     <title>NICE</title>
 </head>
 <body>
+    <p></p>
     <form action="/" method="post">
         {% csrf_token %}
         <button class="btn btn-outline-primary" type="submit">retour à la liste</button>
@@ -29,7 +30,7 @@
             <img class="card-img-top" src="{{pokemon.image}}" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">{{pokemon.nameFr}}</h5>
-                <p class="card-text">Poids : {{ pokemon.poids }} kg</p>
+                <p class="card-text">Poids : {{ pokemon.poids }} kg, Taille : {{ pokemon.taille }} m</p>
                 <p class="card-text">Types : </p>
                 {% for test  in pokemon.type %}
                         <p class="card-text">
