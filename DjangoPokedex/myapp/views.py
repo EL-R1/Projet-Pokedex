@@ -2,11 +2,11 @@ from django.http import HttpResponse
 from django.shortcuts import render
 import random
 import requests as re
+from .models import TeamPokemon
 
-
+TeamPokemon = TeamPokemon()
 def translate(num_pok, content, nameEn):
     # Traduction dynamique avec les csv data sur github
-
     nameFr = ''
     nameEn = str(nameEn).capitalize()
     x = 0
@@ -72,6 +72,11 @@ def find_num_pok(nameEn):
 
 
 def init_pokemon(num_pok):
+    if isinstance(num_pok, str):
+        if num_pok.isdigit():
+            num_pok = int(num_pok)
+    if num_pok is None:
+        return
     url = "https://pokeapi.co/api/v2/pokemon/"
     name_url = "https://pokeapi.co/api/v2/pokemon-species/"
     type_url = "https://pokeapi.co/api/v2/type/"
@@ -82,6 +87,7 @@ def init_pokemon(num_pok):
     typeFr = ''
     taille = ''
     nameFr = ''
+    shiny = ''
     if isinstance(num_pok, int):
         if 1 <= num_pok <= 898 or 10001 <= num_pok <= 10220:
             r = re.get(url + str(num_pok))
@@ -92,6 +98,7 @@ def init_pokemon(num_pok):
             image = response['sprites']['other']['official-artwork']['front_default']
             type = response['types']
             taille = int(response['height']) / 10
+            shiny = response['sprites']['front_shiny']
 
             # Traduction avec l'api des types
             typeFr = []
@@ -128,24 +135,33 @@ def init_pokemon(num_pok):
         nameFr = 'ඞ'
 
     tab_num_pok = {'nameEn': nameEn, 'img': img, 'poids': poids, 'image': image, 'type': typeFr, 'taille': taille,
-                   'nameFr': nameFr}
+                   'nameFr': nameFr, 'shiny': shiny}
     return tab_num_pok
 
 
 # Create your views here.
 def index(request):
     if request.method == 'POST':
-        if request.POST.get("Pokemon") is not None and request.POST.get("Pokemon_Team") is None:
+        if request.POST.get("Pokemon") and request.POST.get("Pokemon_Team") is None:
             num_pok = int(request.POST.get("Pokemon"))
-        elif request.POST.get("Random") is not None:
+        elif request.POST.get("Random"):
             num_pok = random.randint(1, 800)
-        elif request.POST.get("Pokemon_Name") is not None:
+        elif request.POST.get("Pokemon_Name"):
             num_pok = str(request.POST.get("Pokemon_Name"))
             pokemon_name = str(num_pok)
             num_pok = find_num_pok(pokemon_name)
-        elif request.POST.get("Pokemon_Team") is not None:
-            text = "<h1>Pokemon : none </p>"
-            return render(request, 'myapp/temp.html')
+        elif request.POST.get("Pokemon_Team"):
+            if request.POST.get("Pokemon") != "-1":
+                pok_id = str(request.POST.get("Pokemon"))
+                addToTeam(pok_id)
+            tab1 = init_pokemon(TeamPokemon.Pokid1)
+            tab2 = init_pokemon(TeamPokemon.Pokid2)
+            tab3 = init_pokemon(TeamPokemon.Pokid3)
+            tab4 = init_pokemon(TeamPokemon.Pokid4)
+            tab5 = init_pokemon(TeamPokemon.Pokid5)
+            ArrayTeam = [tab1, tab2, tab3, tab4, tab5]
+            context = {'list':TeamPokemon, 'ArrayTeam':ArrayTeam}
+            return render(request, 'myapp/temp.html',context)
             # test de session de merde
 
             # x =-1
@@ -181,10 +197,8 @@ def index(request):
     tab_pok0 = init_pokemon(num_pok0)
     # pokémon actuel
     tab_pok = init_pokemon(num_pok)
-
     # pokémon suivant
     tab_pok1 = init_pokemon(num_pok1)
-
     # Récupération de tous les pokémons pour la barre de recherche
     all_pok_url = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1500"
     all_pokemon = []
@@ -192,7 +206,6 @@ def index(request):
     response = r.json()
     for pokemon in response["results"]:
         all_pokemon.append(pokemon['name'])
-
     # Traduire les noms des pokémons
     # name = re.get(
     #     "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/pokemon_species_names.csv").text
@@ -212,17 +225,33 @@ def index(request):
     # all_pokemonFr = []
     # for pokemons in all_pokemon:
     #     all_pokemon.append(translate(0, name, pokemons))
-
     context = {'name': tab_pok['nameFr'], 'name0': tab_pok0['nameFr'], 'name1': tab_pok1['nameFr'],
                'img0': tab_pok0['img'], 'img': tab_pok['img'],
                'img1': tab_pok1['img'],
                'image': tab_pok['image'], 'poids': tab_pok['poids'], 'num_pok': num_pok, 'num_pok0': num_pok0,
                'num_pok1': num_pok1,
                'type': tab_pok["type"],
-               'taille': tab_pok['taille'], 'all_pokemon': all_pokemon}
+               'taille': tab_pok['taille'], 'all_pokemon': all_pokemon,
+               'shiny': tab_pok['shiny']}
 
     return render(request, 'myapp/index.html', context)
 
 
+def addToTeam(pok_id):
+    if TeamPokemon.Pokid1 is None:
+        TeamPokemon.Pokid1 = pok_id
+    elif TeamPokemon.Pokid2 is None:
+        TeamPokemon.Pokid2 = pok_id
+    elif TeamPokemon.Pokid3 is None:
+        TeamPokemon.Pokid3 = pok_id
+    elif TeamPokemon.Pokid4 is None:
+        TeamPokemon.Pokid4 = pok_id
+    elif TeamPokemon.Pokid5 is None:
+        TeamPokemon.Pokid5 = pok_id
+    else:
+       return False
+
+
 def team(request):
+
     return render(request, 'myapp/temp.html')
