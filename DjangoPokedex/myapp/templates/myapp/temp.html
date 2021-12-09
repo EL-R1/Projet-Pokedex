@@ -25,22 +25,77 @@
     <h1 class="text-center mx-auto">Mon équipe</h1>
 <div class="card-group">
     {% for pokemon in ArrayTeam %}
-        <div class="card text-dark bg-light mb-3 border-success mb-3" >
+        <div class="card text-dark bg-light mb-3 border-success mb-3 color">
         {% if pokemon.image %}
             <img class="card-img-top" src="{{pokemon.image}}" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">{{pokemon.nameFr}}</h5>
                 <p class="card-text">Poids : {{ pokemon.poids }} kg, Taille : {{ pokemon.taille }} m</p>
                 <p class="card-text">Types : </p>
-                {% for test  in pokemon.type %}
-                        <p class="card-text">
-                            {{ test }}
+                {% for type  in pokemon.type %}
+                    {% if 'Plante' in type  %}
+                        <div style="background-color:#9bcc50;">
+                    {% endif %}
+                    {% if 'Poison' in type  %}
+                        <div style="background-color:#B97FC9;">
+                    {% endif %}
+                    {% if 'Feu' in type  %}
+                        <div style="background-color:#FD7D24;">
+                    {% endif %}
+                    {% if 'Psy' in type  %}
+                        <div style="background-color:#F366B9;">
+                    {% endif %}
+                    {% if 'Eau' in type  %}
+                        <div style="background-color:#4592C4;">
+                    {% endif %}
+                    {% if 'Glace' in type  %}
+                        <div style="background-color:#51C4E7;">
+                    {% endif %}
+                    {% if 'Roche' in type  %}
+                        <div style="background-color:#A38C21;">
+                    {% endif %}
+                    {% if 'Insecte' in type  %}
+                        <div style="background-color:#729F3F;">
+                    {% endif %}
+                    {% if 'Normal' in type  %}
+                        <div style="background-color:#A4ACAF;">
+                    {% endif %}
+                    {% if 'Combat' in type  %}
+                        <div style="background-color:#D56723;">
+                    {% endif %}
+                    {% if 'Électrik' in type  %}
+                        <div style="background-color:#EED535;">
+                    {% endif %}
+                    {% if 'Combat' in type  %}
+                        <div style="background-color:#D56723;">
+                    {% endif %}
+                    {% if 'Fée' in type  %}
+                        <div style="background-color:#FDB9E9;">
+                    {% endif %}
+                    {% if 'Acier' in type  %}
+                        <div style="background-color:#9EB7B8;">
+                    {% endif %}
+                    {% if 'Spectre' in type  %}
+                        <div style="background-color:#7B62A3;">
+                    {% endif %}
+                    {% if 'Ténèbres' in type  %}
+                        <div style="background-color:#707070;">
+                    {% endif %}
+                    {% if 'Dragon' in type  %}
+                        <div style="background-color:#7038F8;">
+                    {% endif %}
+                    {% if 'Vol' in type  %}
+                        <div style="background-color:#659BCF;">
+                    {% endif %}
+                    {% if 'Sol' in type  %}
+                        <div style="background-color:#664024;">
+                    {% endif %}
+                        <p class="card-text" style="text-align:center">
+                            {{ type }}
                         </p>
+                    </div>
                     {% endfor %}
-
             </div>
-
-
         {% else %}
         <img class="card-img-top" src="https://studio.cults3d.com/cpVLSLBgXftw_KujSHqr_VFILaI=/516x516/https://files.cults3d.com/uploaders/13859964/illustration-file/9d9c1945-5499-463e-92ca-5b5954e03b41/No%20Pokemon%20hunting.png" alt="Card image cap">
             <div class="card-body">

@@ -132,15 +132,71 @@
                 <th> Poids :</th>
                 <th> Taille :</th>
                 <th> Shiny :</th>
-
             </tr>
-
             <tr>
                 <td>
-                    {% for test  in type %}
-                        <p>
-                            {{ test }}
-                        </p>
+                    {% for typ  in type %}
+                    {% if 'Plante' in typ  %}
+                        <div style="background-color:#9bcc50;">
+                    {% endif %}
+                    {% if 'Poison' in typ  %}
+                        <div style="background-color:#B97FC9;">
+                    {% endif %}
+                    {% if 'Feu' in typ  %}
+                        <div style="background-color:#FD7D24;">
+                    {% endif %}
+                    {% if 'Psy' in typ  %}
+                        <div style="background-color:#F366B9;">
+                    {% endif %}
+                    {% if 'Eau' in typ  %}
+                        <div style="background-color:#4592C4;">
+                    {% endif %}
+                    {% if 'Glace' in typ  %}
+                        <div style="background-color:#51C4E7;">
+                    {% endif %}
+                    {% if 'Roche' in typ  %}
+                        <div style="background-color:#A38C21;">
+                    {% endif %}
+                    {% if 'Insecte' in typ  %}
+                        <div style="background-color:#729F3F;">
+                    {% endif %}
+                    {% if 'Normal' in typ  %}
+                        <div style="background-color:#A4ACAF;">
+                    {% endif %}
+                    {% if 'Combat' in typ  %}
+                        <div style="background-color:#D56723;">
+                    {% endif %}
+                    {% if 'Électrik' in typ  %}
+                        <div style="background-color:#EED535;">
+                    {% endif %}
+                    {% if 'Combat' in typ  %}
+                        <div style="background-color:#D56723;">
+                    {% endif %}
+                    {% if 'Fée' in typ  %}
+                        <div style="background-color:#FDB9E9;">
+                    {% endif %}
+                    {% if 'Acier' in typ  %}
+                        <div style="background-color:#9EB7B8;">
+                    {% endif %}
+                    {% if 'Spectre' in typ  %}
+                        <div style="background-color:#7B62A3;">
+                    {% endif %}
+                    {% if 'Ténèbres' in typ  %}
+                        <div style="background-color:#707070;">
+                    {% endif %}
+                    {% if 'Dragon' in typ  %}
+                        <div style="background-color:#7038F8;">
+                    {% endif %}
+                    {% if 'Vol' in typ  %}
+                        <div style="background-color:#659BCF;">
+                    {% endif %}
+                    {% if 'Sol' in typ  %}
+                        <div style="background-color:#664024;">
+                    {% endif %}
+                            <p>
+                                {{ typ }}
+                            </p>
+                        </div>
                     {% endfor %}
                 </td>
                 <td>

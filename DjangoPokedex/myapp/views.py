@@ -39,8 +39,6 @@ def translate_name():
     return nameFr
 
 
-
-
 def find_num_pok(nameEn):
     # Trouver l'id du pokemon lors de la recherche
     try:
@@ -199,10 +197,8 @@ def index(request):
     tab_pok0 = init_pokemon(num_pok0)
     # pokémon actuel
     tab_pok = init_pokemon(num_pok)
-
     # pokémon suivant
     tab_pok1 = init_pokemon(num_pok1)
-
     # Récupération de tous les pokémons pour la barre de recherche
     all_pok_url = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1500"
     all_pokemon = []
@@ -210,7 +206,6 @@ def index(request):
     response = r.json()
     for pokemon in response["results"]:
         all_pokemon.append(pokemon['name'])
-
     # Traduire les noms des pokémons
     # name = re.get(
     #     "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/pokemon_species_names.csv").text
@@ -230,7 +225,6 @@ def index(request):
     # all_pokemonFr = []
     # for pokemons in all_pokemon:
     #     all_pokemon.append(translate(0, name, pokemons))
-
     context = {'name': tab_pok['nameFr'], 'name0': tab_pok0['nameFr'], 'name1': tab_pok1['nameFr'],
                'img0': tab_pok0['img'], 'img': tab_pok['img'],
                'img1': tab_pok1['img'],
@@ -241,6 +235,7 @@ def index(request):
                'shiny': tab_pok['shiny']}
 
     return render(request, 'myapp/index.html', context)
+
 
 def addToTeam(pok_id):
     if TeamPokemon.Pokid1 is None:
@@ -255,6 +250,7 @@ def addToTeam(pok_id):
         TeamPokemon.Pokid5 = pok_id
     else:
        return False
+
 
 def team(request):
 
