@@ -21,7 +21,7 @@ py -m venv Pokedex
 
 Un fois dans l'environnement virtuel nous pouvons installer nos packages/librairies
 
-###Packages
+### Packages
  - Nous avons beaucoup de package dans notre projet et voici comment les installer :
 
 ```shell
@@ -35,13 +35,13 @@ cd .\Projet-Pokedex\DjangoPokedex\
 pip install requests
 ```
 
-#Lancement
+# Lancement
 Vous pouvez lancer ce projet avec la commande :
 ````shell
 py .\manage.py runserver
 ````
 
-##Contributeurs
+## Contributeurs
 - Juliette Raynaud
 - Mathys Vende
 - Erwan Leblanc
