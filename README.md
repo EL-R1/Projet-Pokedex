@@ -41,6 +41,12 @@ Vous pouvez lancer ce projet avec la commande :
 py .\manage.py runserver
 ````
 
+## Choix réalisés
+ - Prise en compte de tous les pokémons de l'api (pas seulement les 151 premiers)
+ - Traduction des noms en fraçais (sauf pour la recherche)
+ - Stats nécessaires pour un affichage clair et concis
+ - (petit easter egg)
+
 ## Contributeurs
 - Juliette Raynaud
 - Mathys Vende
